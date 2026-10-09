@@ -2,13 +2,13 @@
 
 The `ballerinax/cloudmersive.currency` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [currency_price_conversion](./currency_price_conversion/currency_price_conversion.md) - Validate a currency pair and convert a price.
+2. [exchange_rate_lookup](./exchange_rate_lookup/exchange_rate_lookup.md) - Look up exchange rates to several target currencies.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. A Cloudmersive API key, supplied through each example's `Config.toml`.
+2. Ballerina Swan Lake 2201.12.0 or later.
 
 ## Running an example
 
