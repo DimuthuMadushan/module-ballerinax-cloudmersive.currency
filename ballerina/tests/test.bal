@@ -18,10 +18,17 @@ import ballerina/os;
 import ballerina/test;
 
 final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
-final string serviceUrl = isLiveServer ? "https://testapi.cloudmersive.com/currency/exchange-rates" : "http://localhost:9090";
+final string serviceUrl = isLiveServer ? "https://api.cloudmersive.com/currency/exchange-rates" : "http://localhost:9090";
 final string apiKey = isLiveServer ? os:getEnv("CLOUDMERSIVE_API_KEY") : "test_api_key";
 
-final Client cloudmersiveClient = check new ({apikey: apiKey}, {}, serviceUrl);
+function initClient() returns Client|error {
+    if isLiveServer && apiKey.trim() == "" {
+        return error("CLOUDMERSIVE_API_KEY must be set when IS_LIVE_SERVER=true");
+    }
+    return new ({apikey: apiKey}, {}, serviceUrl);
+}
+
+final Client cloudmersiveClient = check initClient();
 
 @test:Config {groups: ["live_tests", "mock_tests"]}
 function testListAvailableCurrencies() returns error? {

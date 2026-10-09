@@ -18,6 +18,8 @@ import ballerina/http;
 
 listener http:Listener ep0 = new (9090);
 
+function isValidKey(string? apikey) returns boolean => apikey == "test_api_key";
+
 @http:ServiceConfig {treatNilableAsOptional: true}
 service / on ep0 {
     # Converts a price from the source currency into the destination currency
@@ -25,8 +27,12 @@ service / on ep0 {
     # + 'source - Source currency three-digit code (ISO 4217), e.g. USD, EUR, etc
     # + destination - Destination currency three-digit code (ISO 4217), e.g. USD, EUR, etc
     # + payload - Input price, such as 19.99 in source currency
-    # + return - OK
-    resource function post convert/[string 'source]/to/[string destination](@http:Payload decimal payload) returns ConvertedCurrencyResult {
+    # + apikey - Cloudmersive API key
+    # + return - OK, or 401 when the API key is missing or invalid
+    resource function post convert/[string 'source]/to/[string destination](@http:Payload decimal payload, @http:Header {name: "Apikey"} string? apikey) returns ConvertedCurrencyResult|http:Unauthorized {
+        if !isValidKey(apikey) {
+            return http:UNAUTHORIZED;
+        }
         return {
             formattedPriceAsString: "EUR 18.35",
             iSOCurrencyCode: "EUR",
@@ -39,15 +45,23 @@ service / on ep0 {
     #
     # + 'source - Source currency three-digit code (ISO 4217), e.g. USD, EUR, etc
     # + destination - Destination currency three-digit code (ISO 4217), e.g. USD, EUR, etc
-    # + return - OK
-    resource function post get/[string 'source]/to/[string destination]() returns ExchangeRateResult {
+    # + apikey - Cloudmersive API key
+    # + return - OK, or 401 when the API key is missing or invalid
+    resource function post get/[string 'source]/to/[string destination](@http:Header {name: "Apikey"} string? apikey) returns ExchangeRateResult|http:Unauthorized {
+        if !isValidKey(apikey) {
+            return http:UNAUTHORIZED;
+        }
         return {exchangeRate: 0.9183};
     }
 
     # Get a list of available currencies and corresponding countries
     #
-    # + return - OK
-    resource function post list\-available() returns AvailableCurrencyResponse {
+    # + apikey - Cloudmersive API key
+    # + return - OK, or 401 when the API key is missing or invalid
+    resource function post list\-available(@http:Header {name: "Apikey"} string? apikey) returns AvailableCurrencyResponse|http:Unauthorized {
+        if !isValidKey(apikey) {
+            return http:UNAUTHORIZED;
+        }
         return {
             currencies: [
                 {

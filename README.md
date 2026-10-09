@@ -8,7 +8,6 @@
 
 The Cloudmersive Currency connector provides programmatic access to the [Cloudmersive Currency API](https://api.cloudmersive.com/docs/currency.asp), which helps you retrieve exchange rates and convert prices between currencies. This connector supports version 1 of the API and lets Ballerina applications look up supported currencies, fetch live exchange rates and convert prices with a few remote method calls.
 
-
 ## Setup guide
 
 To use this connector you need a Cloudmersive API key.

@@ -11,7 +11,7 @@ The suite runs in two modes.
 | Mode | How to run | Behaviour |
 |---|---|---|
 | Mock server (default) | `bal test` | Requests are served by `tests/mock_service.bal` on `localhost:9090` |
-| Live server | `IS_LIVE_SERVER=true CLOUDMERSIVE_API_KEY=<key> bal test` | Requests go to `https://testapi.cloudmersive.com/currency/exchange-rates` |
+| Live server | `IS_LIVE_SERVER=true CLOUDMERSIVE_API_KEY=<key> bal test` | Requests go to `https://api.cloudmersive.com/currency/exchange-rates` |
 
 The tests read `IS_LIVE_SERVER` and `CLOUDMERSIVE_API_KEY` from the environment.
 

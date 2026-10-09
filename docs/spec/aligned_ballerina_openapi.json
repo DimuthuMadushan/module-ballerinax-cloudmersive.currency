@@ -7,12 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://testapi.cloudmersive.com/currency/exchange-rates"
-        }
-    ],
-    "security": [
-        {
-            "Apikey": []
+            "url": "https://api.cloudmersive.com/currency/exchange-rates"
         }
     ],
     "paths": {

@@ -5,7 +5,7 @@
     "title": "currencyapi",
     "description": "The currency APIs help you retrieve exchange rates and convert prices between currencies easily."
   },
-  "host": "testapi.cloudmersive.com",
+  "host": "api.cloudmersive.com",
   "schemes": [
     "https"
   ],
@@ -236,10 +236,5 @@
       "name": "Apikey",
       "in": "header"
     }
-  },
-  "security": [
-    {
-      "Apikey": []
-    }
-  ]
+  }
 }
